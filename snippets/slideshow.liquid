@@ -39,6 +39,8 @@
                 {% if block.type=='desktop_banner' %}
                     <a href="{{block.settings.desktop_image_link1}}">
                         <img src="{{ block.settings.heroone | img_url: 'master' }}" alt="{{ site.name }}">
+                        <h2> Hi</h2> 
+                        <h2 class="{{block.settings.heading_size}}">{{block.settings.banner_heading1}}</h2> 
                     </a> 
                 {% endif %}
             {% endfor %}
