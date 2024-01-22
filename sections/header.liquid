@@ -1,0 +1,93 @@
+<div class="pc-header"> 
+    <div class="header-flex"> 
+        <div class="section-logo"> 
+            <a href="/" class="header-logo"> 
+                <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ site.name }}">
+            </a> 
+        </div> 
+        <div class="menu"> 
+            {% for link in section.settings.navigation.links %}
+                <li class="menu-item"> 
+                    <a class="menu-nav" href="{{ link.url }}"> 
+                        {{ link.title }}
+                    </a> 
+                </li> 
+            {% endfor %}
+
+            {% for link in section.settings.navigation_icons.links %}
+                <li class="icon-item"> 
+                    <a class="menu-nav" href="{{ link.url }}"> 
+                    {% assign iconIndex = forloop.index0 %}
+
+                    {% if iconIndex == 0 %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="20.5" r="1"/><circle cx="18" cy="20.5" r="1"/><path d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"/></svg>
+                    {% elsif iconIndex == 1 %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    {% endif %}
+                    </a> 
+                </li> 
+            {% endfor %}
+        </div> 
+    </div>  
+</div>
+
+<style> 
+.header{
+    padding: {{ section.settings.padding }}px 0; 
+    
+    @media only screen and (max-width: 749px){ 
+        display: none; 
+    }
+}
+
+.header-logo{
+    max-width: {{ section.settings.logo_width }}px; 
+}
+</style>
+
+{% schema %}
+{
+    "name": "Header", 
+    "tag": "header", 
+    "class": "header",
+    "settings": [
+        {
+            "type": "range", 
+            "id": "padding", 
+            "label": "Header height", 
+            "default": 30, 
+            "min": 5, 
+            "max": 100, 
+            "step": 1
+        }, 
+        {
+            "type": "image_picker", 
+            "id": "logo", 
+            "label": "Logo"
+        }, 
+        {
+            "type": "range", 
+            "id": "logo_width", 
+            "label": "Logo width", 
+            "default": 100, 
+            "min": 20, 
+            "max": 300, 
+            "step": 5
+        }, 
+        {
+            "type": "link_list", 
+            "id": "navigation", 
+            "label": "Navigation menu"
+        }, 
+        {
+            "type": "link_list", 
+            "id": "navigation_icons", 
+            "label": "navigation_icons"
+
+        }
+    ]
+}
+{% endschema %}

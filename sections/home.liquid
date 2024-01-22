@@ -1,0 +1,125 @@
+{% include 'slideshow' %}
+{% include 'hero' %}
+{% schema %}
+{
+    "name": "Home",
+    "settings": [
+        {
+            "type": "color",
+            "id": "banner_bgcolor", 
+            "label": "Mobile Banner background colour", 
+            "default": "#ff001d" 
+        }, 
+        {
+            "type": "color",
+            "id": "hero_bgcolor", 
+            "label": "Dekstop Banner background colour", 
+            "default": "#ff001d" 
+        }
+
+    ], 
+    "blocks":[
+        {
+            "type": "banner", 
+            "name": "Mobile banner",
+            "settings": [
+                {
+                    "type":"image_picker", 
+                    "id": "bannerone", 
+                    "label": "Banner One"
+                }, 
+                {
+                    "type":"image_picker", 
+                    "id": "bannertwo", 
+                    "label": "Banner Two"
+                }, 
+                {
+                    "type":"image_picker", 
+                    "id": "bannerthree", 
+                    "label": "Banner Three"
+                },
+                {
+                    "type": "url",
+                    "id": "image_link1", 
+                    "label": "Banner One Link"
+                },
+                {
+                    "type": "url",
+                    "id": "image_link2", 
+                    "label": "Banner Two Link"
+                },
+                {
+                    "type": "url",
+                    "id": "image_link3", 
+                    "label": "Banner Three Link"
+                }
+            ]
+        }, 
+        {
+            "type": "desktop_banner", 
+            "name": "Desktop Banner", 
+            "settings": [
+                {
+                    "type":"image_picker", 
+                    "id": "heroone", 
+                    "label": "Desktop Banner One"
+                }, 
+                {
+                    "type":"image_picker", 
+                    "id": "herotwo", 
+                    "label": "Desktop Banner Two"
+                }, 
+                {
+                    "type":"image_picker", 
+                    "id": "herothree", 
+                    "label": "Desktop Banner Three"
+                },
+                {
+                    "type": "url",
+                    "id": "desktop_image_link1", 
+                    "label": "Desktop Banner One Link"
+                },
+                {
+                    "type": "url",
+                    "id": "desktop_image_link2", 
+                    "label": "Desktop Banner Two Link"
+                },
+                {
+                    "type": "url",
+                    "id": "desktop_image_link3", 
+                    "label": "Desktop Banner Three Link"
+                }
+            ]
+        }, 
+        {
+            "type": "logo", 
+            "name": "Mobile Logo", 
+            "settings": [
+                {
+                    "type":"image_picker", 
+                    "id": "mlogo", 
+                    "label": "Mobile logo"
+                }, 
+                {
+                    "type": "range", 
+                    "id": "mlogo_width", 
+                    "label": "Mobile logo width", 
+                    "default": 100, 
+                    "min": 20, 
+                    "max": 300, 
+                    "step": 5
+                }, 
+                {
+                    "type": "range", 
+                    "id": "mlogo_height", 
+                    "label": "Mobile logo height", 
+                    "default": 100, 
+                    "min": 20, 
+                    "max": 300, 
+                    "step": 5
+                }
+            ]
+        }
+    ]
+}
+{% endschema %} 

@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+$width: {{ settings.page_width }}px; 
+$blacktext: {{ settings.text_color}};
+$bp: 750px; 
+$white: #ffffff; 
+
+@media only screen and (max-width: $bp){
+    .desktop--device{
+        display: none; 
+    }
+
+    .mobile--device{
+        display: block; 
+    }
+}
+
+@media only screen and (min-width: $bp){
+    .mobile--device {
+        display: none; 
+    }
+
+    .desktop--device{
+        display: block; 
+    }
+}
+
+*{
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+html, body{
+    font-family: 'Oswald', sans-serif;
+    height: 100%; 
+    width: 100%;
+    margin: 0; 
+    padding: 0; 
+}
+
+a{
+    text-decoration: none; 
+    color: $blacktext; 
+}
+
+li{
+    list-style: none; 
+}
+
+img, svg {
+    display: block; 
+    width: 100px; 
+}
+
+.hero{
+    background: #111111; 
+}
+
+/*header*/ 
+
+.pc-header{
+    max-width: $width; 
+    width: calc(100% - 40px); 
+    margin:0 auto; 
+    background: $white; 
+
+    @media only screen and (max-width: 749px){ 
+        display: none; 
+    }
+}
+
+.header-flex{
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+}
+
+.menu{
+    display: flex; 
+
+}
+
+.icon-item svg{
+    display: block; 
+    width: 120px; 
+    margin-bottom: 2px; 
+
+}
+
+.menu-item{
+    display: block; 
+    width: 120px; 
+
+}
+
+.menu-nav{
+    font-size: 19px;
+    font-weight: 700; 
+}
+
+.mobile-header{
+    @media only screen and (min-width: $bp){ 
+        display: none; 
+    }
+}
+
+.mobile-logo {
+    display: flex; 
+    justify-content: center; 
+    position: absolute; 
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3; 
+}
+
+.mobile-banner{
+    width: 100vw; 
+    height: 100vh;  
+    position: relative; 
+    overflow: hidden; 
+
+    @media only screen and (min-width: 750px){ 
+        display: none; 
+    }
+}
+
+.mobile-banner .mslide-list{ 
+    display: flex; 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    left: 0; 
+    top: 0; 
+    transition: 1s; 
+}
+
+.m-slideshow{
+    z-index: 2; 
+}
+
+.m-slideshow img{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    opacity: 0.9; 
+}
+
+.desktop-banner{ 
+    width: 100vw; 
+    height: 80vh;  
+    position: relative; 
+    overflow: hidden; 
+    @media only screen and (max-width: 749px){
+        display: none; 
+    }
+}
+
+.desktop-banner .dslide-list{ 
+    display: flex; 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    left: 0; 
+    top: 0; 
+    transition: 1s;
+}
+
+.d-slideshow img{
+    width: 100vw;
+    height: 80vh;
+    object-fit: cover;
+    opacity: 0.9; 
+}
+

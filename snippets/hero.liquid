@@ -1,0 +1,21 @@
+<div class="mobile-header"> 
+    <div class="mobile-logo"> 
+        <a href="/" class="m-logo"> 
+            {% for block in section.blocks %}
+                {% if block.type == 'logo' %}
+                    <img src="{{ block.settings.mlogo | img_url: 'master' }}" alt="{{ site.name }}">
+                {% endif %}
+            {% endfor %}
+        </a> 
+    </div> 
+</div> 
+  
+
+<style>
+    .m-logo img{
+        width: {{block.settings.mlogo_width}}px;
+        height: {{block.settings.mlogo_height}}px; 
+    }
+</style> 
+
+

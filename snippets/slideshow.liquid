@@ -1,0 +1,122 @@
+<div class="mobile-banner"> 
+    <div class="mslide-list">
+        <div class="m-slideshow"> 
+            {% for block in section.blocks %}
+                {% if block.type=='banner' %}
+                    <a href="{{block.settings.image_link1}}">
+                        <img src="{{ block.settings.bannerone | img_url: 'master' }}" alt="{{ site.name }}">
+                    </a> 
+                {% endif %}
+            {% endfor %}
+        </div> 
+
+        <div class="m-slideshow"> 
+            {% for block in section.blocks %}
+                {% if block.type =='banner'%}
+                    <a href="{{block.settings.image_link2}}">
+                        <img src="{{ block.settings.bannertwo| img_url: 'master' }}" alt="{{ site.name }} ">
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div> 
+
+        <div class="m-slideshow"> 
+            {% for block in section.blocks %}
+                {% if block.type == 'banner' %}
+                    <a href="{{block.settings.image_link3}}"> 
+                        <img src="{{ block.settings.bannerthree| img_url: 'master' }}" alt="{{ site.name }} ">
+                    </a> 
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div> 
+</div> 
+
+<div class="desktop-banner"> 
+    <div class="dslide-list"> 
+        <div class="d-slideshow"> 
+            {% for block in section.blocks %}
+                {% if block.type=='desktop_banner' %}
+                    <a href="{{block.settings.desktop_image_link1}}">
+                        <img src="{{ block.settings.heroone | img_url: 'master' }}" alt="{{ site.name }}">
+                    </a> 
+                {% endif %}
+            {% endfor %}
+        </div> 
+
+        <div class="d-slideshow"> 
+            {% for block in section.blocks %}
+                {% if block.type =='desktop_banner'%}
+                    <a href="{{block.settings.desktop_image_link2}}">
+                        <img src="{{ block.settings.herotwo| img_url: 'master' }}" alt="{{ site.name }} ">
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div> 
+
+        <div class="d-slideshow"> 
+            {% for block in section.blocks %}
+                {% if block.type == 'desktop_banner' %}
+                    <a href="{{block.settings.desktop_image_link3}}"> 
+                        <img src="{{ block.settings.herothree| img_url: 'master' }}" alt="{{ site.name }} ">
+                    </a> 
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div> 
+</div> 
+      
+
+
+<style>
+    .m-slideshow{
+        background-color: {{section.settings.banner_bgcolor}}; 
+    }
+
+    .d-slideshow{
+        background-color: {{section.settings.hero_bgcolor}}; 
+    }
+</style> 
+
+<script> 
+    let slider = document.querySelector('.mobile-banner .mslide-list');
+    let items = document.querySelectorAll('.mobile-banner .mslide-list .m-slideshow');
+
+    let lengthItems = items.length - 1;
+    let active = 0;
+
+    let refreshInterval = setInterval(() => {
+        active = active + 1 <= lengthItems ? active + 1 : 0;
+        reloadSlider();
+    }, 3000);
+
+    function reloadSlider() {
+        slider.style.left = -items[active].offsetLeft + 'px';
+    }
+
+    window.onresize = function (event) {
+        reloadSlider();
+    };
+
+
+    let desktopslider= document.querySelector('.desktop-banner .dslide-list'); 
+    let desktopitems=document.querySelectorAll('.desktop-banner .dslide-list .d-slideshow'); 
+
+    let deskLength=desktopitems.length-1; 
+    let deskactive=0; 
+
+    let refreshingInterval=setInterval(()=> {
+        deskactive= deskactive+1 <= deskLength ? deskactive + 1 : 0; 
+        reloadDeskSlider(); 
+    }, 3000);
+
+    function reloadDeskSlider(){
+        desktopslider.style.left=-desktopitems[deskactive].offsetLeft + 'px'; 
+
+    }
+
+    window.onresize=function(event){
+        reloadDeskSlider(); 
+    };
+</script> 
+
