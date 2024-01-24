@@ -107,25 +107,46 @@
         reloadSlider();
     };
 
+    const myslide=document.querySelectorAll('.d-slideshow'); 
+    let counter=1; 
+    slidefun(counter); 
 
-    let desktopslider= document.querySelector('.desktop-banner .dslide-list'); 
-    let desktopitems=document.querySelectorAll('.desktop-banner .dslide-list .d-slideshow'); 
-
-    let deskLength=desktopitems.length-1; 
-    let deskactive=0; 
-
-    let refreshingInterval=setInterval(()=> {
-        deskactive= deskactive+1 <= deskLength ? deskactive + 1 : 0; 
-        reloadDeskSlider(); 
-    }, 3000);
-    
-    function reloadDeskSlider(){
-        desktopslider.style.left=-desktopitems[deskactive].offsetLeft + 'px'; 
-
+    let timer= setInterval(autoSlide, 3000); 
+    function autoSlide(){
+        if (counter>=myslide.length){
+            counter=1; 
+        }
+        else{
+            counter+=1; 
+        }
+        slidefun(counter); 
     }
 
-    window.onresize=function(event){
-        reloadDeskSlider(); 
-    };
+    function plusSlides(n){
+        counter+=n; 
+        slidefun(counter);
+    }
+
+    function currentSlide(n){
+        clearInterval(timer); 
+        timer=setInterval(autoSlide, 3000); 
+    }
+
+    function slidefun(n){
+        let i; 
+
+        for (i=0; i<myslide.length; i++){
+            myslide[i].style.display="none"; 
+        }
+
+        if (!myslide.length){
+            counter=1; 
+        }
+
+        myslide[counter -1].style.display="block"; 
+    }
+
+
+
 </script> 
 
