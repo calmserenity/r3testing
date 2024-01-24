@@ -41,7 +41,7 @@
                         <img src="{{ block.settings.heroone | img_url: 'master' }}" alt="{{ site.name }}">
                     </a> 
                     <div class="banner-content"> 
-                        <h2 class="{{block.settings.heading_size}}">{{block.settings.banner_heading1}}</h2> 
+                        <h2 style= "color: {{block.settings.font_color}};" class="{{block.settings.heading_size}}">{{block.settings.banner_heading1}}</h2> 
                     </div> 
                 {% endif %}
             {% endfor %}
@@ -53,6 +53,9 @@
                     <a href="{{block.settings.desktop_image_link2}}">
                         <img src="{{ block.settings.herotwo| img_url: 'master' }}" alt="{{ site.name }} ">
                     </a>
+                    <div class="banner-content"> 
+                        <h2 style= "color: {{block.settings.font_color}};" class="{{block.settings.heading_size}}">{{block.settings.banner_heading2}}</h2> 
+                    </div> 
                 {% endif %}
             {% endfor %}
         </div> 
@@ -63,6 +66,9 @@
                     <a href="{{block.settings.desktop_image_link3}}"> 
                         <img src="{{ block.settings.herothree| img_url: 'master' }}" alt="{{ site.name }} ">
                     </a> 
+                    <div class="banner-content"> 
+                        <h2 style= "color: {{block.settings.font_color}};" class="{{block.settings.heading_size}}">{{block.settings.banner_heading3}}</h2> 
+                    </div> 
                 {% endif %}
             {% endfor %}
         </div>
@@ -112,7 +118,7 @@
         deskactive= deskactive+1 <= deskLength ? deskactive + 1 : 0; 
         reloadDeskSlider(); 
     }, 3000);
-
+    
     function reloadDeskSlider(){
         desktopslider.style.left=-desktopitems[deskactive].offsetLeft + 'px'; 
 
