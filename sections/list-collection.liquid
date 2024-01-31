@@ -1,0 +1,28 @@
+<div class="desktop-featured">
+    <div class="dfeatured-title"> 
+        <h1> ICONIC</h1> 
+    </div> 
+    <div class="dfeature-row"> 
+        {% for product in collections['frontpage'].products %}
+            <div class="dfeature-imageslide"> 
+                <a href= "{{ product.url}}"> 
+                    <img src= "{{ product.featured_image | image_url: width: 400}}"/> 
+                <h3>{{ product.title}} </h3> 
+                <p> {{product.price | money }} </p>
+            </div> 
+        {% endfor %}
+    </div> 
+</div> 
+
+
+{% schema %}
+{
+    "name": "featured-products", 
+    "settings":[], 
+    "presets":[
+        {
+            "name": "featured-products"
+        }
+    ]
+}
+{% endschema %}
