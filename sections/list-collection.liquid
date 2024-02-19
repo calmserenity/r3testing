@@ -4,11 +4,13 @@
     </div> 
     <div class="dfeature-row"> 
         {% for product in collections['frontpage'].products %}
-            <div class="dfeature-imageslide"> 
-                <a href= "{{ product.url}}"> 
-                    <img src= "{{ product.featured_image | image_url: width: 400}}"/> 
-                <h3>{{ product.title}} </h3> 
-                <p> {{product.price | money }} </p>
+            <div class="dfeature-column"> 
+                <div class="dfeature-imageslide"> 
+                    <a href= "{{ product.url}}"> 
+                        <img src= "{{ product.featured_image | image_url: width: 400}}"/> 
+                    <h3>{{ product.title}} </h3> 
+                    <p> {{product.price | money }} </p>
+                </div> 
             </div> 
         {% endfor %}
     </div> 
