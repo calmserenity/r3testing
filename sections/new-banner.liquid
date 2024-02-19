@@ -1,0 +1,79 @@
+<div class="new-box"> 
+    <div class="inner-box-content-one"> 
+        <h3 style= "color: {{section.settings.header_text_color}}" class="{{section.settings.heading_size}}">{{section.settings.boxsection_header}}</h3>
+        {% for block in section.blocks %}
+            {% if block.type=='banner'%}
+                <img src="{{ block.settings.newfeature | img_url: 'master' }}" alt="{{ site.name }}">
+            {% endif %}
+        {% endfor %}
+    </div> 
+</div> 
+
+<style>
+    .new-box{
+        background-color: {{section.settings.box_bgcolor}}; 
+    }
+</style>
+
+{% schema %}
+{
+    "name": "new-product", 
+    "settings":[
+        {
+            "type": "color",
+            "id": "box_bgcolor", 
+            "label": "New Arrival Background Color", 
+            "default": "#000000" 
+        }, 
+        {
+            "type": "text",
+            "id": "boxsection_header", 
+            "label": "Header of section"
+        }, 
+        {
+            "type": "color", 
+            "id": "header_text_color", 
+            "label": "Header Color", 
+            "default": "#ffffff"
+        }, 
+        {
+            "type":"select", 
+            "id": "heading_size", 
+            "label": "Heading Size", 
+            "options": [
+                {
+                    "value": "h2", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h0", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h1"
+        }
+    ], 
+    "blocks":[
+        {
+            "type": "banner", 
+            "name": "New Arival Banner",
+            "settings": [
+                {
+                    "type":"image_picker", 
+                    "id": "newfeature", 
+                    "label": "New Arrival"
+                }
+            ]
+        }
+    ], 
+    "presets":[
+        {
+            "name": "new-product"
+        }
+    ]
+}
+{% endschema %}

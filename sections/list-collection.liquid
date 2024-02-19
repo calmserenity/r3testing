@@ -8,6 +8,7 @@
                 <div class="dfeature-imageslide"> 
                     <a href= "{{ product.url}}"> 
                         <img src= "{{ product.featured_image | image_url: width: 400}}"/> 
+                    </a>
                     <h3>{{ product.title}} </h3> 
                     <p> {{product.price | money }} </p>
                 </div> 
