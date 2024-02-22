@@ -4,6 +4,14 @@ $blacktext: {{ settings.text_color}};
 $bp: 750px; 
 $white: #ffffff; 
 
+.h4{
+    font-size: 1em; 
+}
+
+.h3{
+    font-size: 1.3em; 
+}
+
 .h2 {
     font-size: 1.5em; 
 }
@@ -164,6 +172,7 @@ img, svg {
     height: 80vh;  
     position: relative; 
     overflow: hidden; 
+    margin-bottom: 3vh; 
 
     @media only screen and (max-width: 749px){
         display: none; 
@@ -209,7 +218,7 @@ img, svg {
 /*featured products*/ 
 
 .desktop-featured{
-    margin: 50px 20px; 
+    margin: 10% 2%; 
 
     @media only screen and (max-width: 749px){
         margin: 50px 10px;  
@@ -260,5 +269,73 @@ img, svg {
 
 }
 
+/*new-banner*/
+
+.new-box-wrap{ 
+    width: 100vw; 
+    height: 100vh;  
+    position: relative; 
+    overflow: hidden; 
+
+    @media only screen and (min-width: 749px){
+        display: none; 
+    }
+}
+
+.slideshow-container {
+    position: relative;
+    width:  100vw;
+    height:  100vh;
+}
+
+.slide {
+    position: absolute;
+    width:  100%;
+    height:  100%;
+    opacity: 0; 
+    transition: opacity  3s;
+    display: none; 
+}
+
+.slide.active {
+    opacity:  1;
+    display: block; 
+}
+
+.slide:first-child{
+    opacity: 1; 
+}
+
+.slide img{
+    display: block;
+    margin: auto; 
+    object-fit: contain; 
+    margin-top: 5vh; 
+    width: 80vw; 
+    height: 100%; 
+}
+
+.slide h3{
+    text-align: center;
+    margin-top: 10vh; 
+}
+
+.slide p{
+    text-align: center; 
+    margin: 6vh 4vh; 
+}
+
+.upcoming_box img{
+    width: 100vw;
+    height: 80vh;
+    object-fit: cover;
+    opacity: 0.9; 
+}
+
+.upcoming_box button{
+    width: 120px; 
+    height: 50px; 
+    border: 2px black; 
+}
 
 
