@@ -325,17 +325,42 @@ img, svg {
     margin: 6vh 4vh; 
 }
 
+.image-container{
+    position: relative; 
+    display: inline; 
+}
+
+.upcoming-container{
+
+    @media only screen and (max-width: 749px){
+        display: none; 
+    }
+}
+
 .upcoming_box img{
     width: 100vw;
     height: 80vh;
     object-fit: cover;
     opacity: 0.9; 
+    z-index: 1; 
 }
 
 .upcoming_box button{
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
     width: 120px; 
     height: 50px; 
     border: 2px black; 
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    border-radius: 2px; 
+    z-index: 2; 
+    opacity: 0.5; 
+}
+
+.upcoming_box button:hover{
+    opacity: 1; 
 }
 
 
