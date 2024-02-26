@@ -1,0 +1,157 @@
+<div class="aboutus-container"> 
+    <div class="aboutus-image"> 
+        <img src="{{ section.settings.aboutus_banner | img_url: 'master'}}" alt="{{ site.name }}">
+    </div> 
+    <div class="aboutus-content-container"> 
+        <div class="aboutus-content"> 
+            <h3 style="color:{{section.settings.content_text_color}};" class="{{section.settings.heading_size}}">{{section.settings.aboutus_heading}}</h3> 
+            <h3 style="color: {{section.settings.content_text_color}};" class="{{section.settings.text_size}}">{{section.settings.aboutus_content}}</h3> 
+        </div> 
+    </div> 
+</div> 
+
+{% for block in section.blocks %}
+    {% if block.type=='aboutus' %}
+        <div class="aboutus-desktop-box" style="background-color: {{block.settings.desktop_aboutus_bg}};"> 
+            <div class="aboutus-boxcontent"> 
+                <h3 style="color:{{block.settings.content_text_color}};" class="{{block.settings.heading_size}}">{{section.settings.aboutus_heading}}</h3> 
+                <h3 style="color: {{block.settings.content_text_color}};" class="{{block.settings.text_size}}">{{section.settings.aboutus_content}}</h3> 
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+
+{% schema %}
+{
+    "name": "aboutus",
+    "settings": [
+        {
+            "type": "image_picker", 
+            "id": "aboutus_banner", 
+            "label": "About Us Banner"
+        }, 
+        {
+            "type": "text", 
+            "id": "aboutus_heading", 
+            "label": "About Us Heading"
+        },
+        {
+            "type": "text", 
+            "id": "aboutus_content", 
+            "label": "About Us Text"
+        }, 
+        {
+            "type": "color", 
+            "id": "content_text_color", 
+            "label": "Text Color", 
+            "default": "#000000"
+        }, 
+        {
+            "type":"select", 
+            "id": "heading_size", 
+            "label": "Heading Size", 
+            "options": [
+                {
+                    "value": "h3", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h2", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h2"
+        },
+        {
+            "type":"select", 
+            "id": "text_size", 
+            "label": "Text Size", 
+            "options": [
+                {
+                    "value": "h5", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h4", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h3", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h4"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "aboutus", 
+            "name": "Desktop About Us", 
+            "settings": [
+                {
+                    "type": "color", 
+                    "id": "desktop_aboutus_bg", 
+                    "label": "Background Colour"
+                },
+                {
+                    "type": "color", 
+                    "id": "content_text_color", 
+                    "label": "Text Color", 
+                    "default": "#000000"
+                }, 
+                {
+                    "type":"select", 
+                    "id": "heading_size", 
+                    "label": "Heading Size", 
+                    "options": [
+                        {
+                            "value": "h3", 
+                            "label": "Small"
+                        }, 
+                        {
+                            "value": "h2", 
+                            "label": "Medium"
+                        }, 
+                        {
+                            "value": "h1", 
+                            "label": "Big"
+                        }
+                    ], 
+                    "default": "h2"
+                },
+                {
+                    "type":"select", 
+                    "id": "text_size", 
+                    "label": "Text Size", 
+                    "options": [
+                        {
+                            "value": "h5", 
+                            "label": "Small"
+                        }, 
+                        {
+                            "value": "h4", 
+                            "label": "Medium"
+                        }, 
+                        {
+                            "value": "h3", 
+                            "label": "Big"
+                        }
+                    ], 
+                    "default": "h4"
+                }
+            ]
+        }
+    ],
+    "presets":[
+        {
+            "name": "About Us"
+        }
+    ]
+}
+
+{% endschema %}

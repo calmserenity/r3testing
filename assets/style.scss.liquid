@@ -4,6 +4,10 @@ $blacktext: {{ settings.text_color}};
 $bp: 750px; 
 $white: #ffffff; 
 
+.h5{
+    font-size: 0.8em; 
+}
+
 .h4{
     font-size: 1em; 
 }
@@ -342,7 +346,6 @@ img, svg {
     height: 80vh;
     object-fit: cover;
     opacity: 0.9; 
-    z-index: 1; 
 }
 
 .upcoming_box button{
@@ -355,7 +358,6 @@ img, svg {
     border: 2px black; 
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     border-radius: 2px; 
-    z-index: 2; 
     opacity: 0.5; 
 }
 
@@ -363,4 +365,63 @@ img, svg {
     opacity: 1; 
 }
 
+/*About Us*/
+.aboutus-container{
+    position: relative; 
+    margin: 10vh 0; 
+
+     @media only screen and (min-width: 749px){
+        display: none; 
+    }
+}
+
+.aboutus-image{
+    position: relative; 
+}
+
+.aboutus-image img{
+    width: 100vw; 
+    height: 35vh; 
+    z-index: 1
+}
+
+.aboutus-content-container{
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, 0%); 
+    width: 90vw;
+    height: 40vh; 
+    background-color: #ffffff; 
+}
+
+.aboutus-content-container h3{
+    text-align: center; 
+}
+
+.aboutus-content{
+    margin: 4vh 4vw;  
+    line-height: 2.0; 
+}
+
+.aboutus-desktop-box{
+    margin: 10vh 20vw; 
+    width: 60vw; 
+    height: 50vh; 
+
+     @media only screen and (max-width: 749px){
+        display: none; 
+    }
+}
+
+.aboutus-boxcontent{
+    width: 60vw; 
+    height: 60vh; 
+    line-height: 2.0; 
+    padding: 5vh 5vw; 
+}
+
+.aboutus-boxcontent h3{
+    text-align: center; 
+}
 
