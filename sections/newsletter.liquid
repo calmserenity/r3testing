@@ -1,0 +1,139 @@
+<div class="newsletter-container"> 
+    <div class="newsletter-image"> 
+        <img src="{{ section.settings.newsletter_image | img_url: 'master'}}" alt="{{ site.name }}">
+    </div> 
+    <div class="newsletter-content"> 
+        <h3 style="color: {{section.settings.header_text_color}};" class="{{section.settings.heading_size}}">{{section.settings.heading}}</h3> 
+        <h3 style="color: {{section.settings.header_text_color}};" class="{{section.settings.desc_size}}">{{section.settings.desc}}</h3>
+
+        {% form 'customer', class: "customNewsLetterForm" %}
+            <input type="email" name="contact[email]" placeholder="Your Email" value="{{form.email}}" autocomplete="off">
+            <button type="submit">Submit</button>
+        {% endform %}
+    </div>
+
+     <div class="newsletter-content-mobile"> 
+        <h3 style="color: {{section.settings.header_text_color}};" class="{{section.settings.heading_size_mobile}}">{{section.settings.heading}}</h3> 
+        <h3 style="color: {{section.settings.header_text_color}};" class="{{section.settings.desc_size_mobile}}">{{section.settings.desc}}</h3>
+
+        {% form 'customer', class: "customNewsLetterForm" %}
+            <input type="email" name="contact[email]" placeholder="Your Email" value="{{form.email}}" autocomplete="off">
+            <button type="submit">Submit</button>
+        {% endform %}
+    </div> 
+</div> 
+
+
+{% schema %}
+{
+    "name": "newsletter", 
+    "settings": [
+        {
+            "type": "image_picker", 
+            "id": "newsletter_image",
+            "label": "Background Image"
+        },
+        {
+            "type": "text", 
+            "id": "heading", 
+            "label": "Newsletter Heading"
+        }, 
+        {
+            "type": "text", 
+            "id": "desc",
+            "label": "Description Heading"
+        },
+        {
+            "type": "color", 
+            "id": "header_text_color", 
+            "label": "Header Color", 
+            "default": "#ffffff"
+        }, 
+        {
+            "type":"select", 
+            "id": "heading_size", 
+            "label": "Heading Size", 
+            "options": [
+                {
+                    "value": "h2", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h0", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h1"
+        },
+        {
+            "type":"select", 
+            "id": "desc_size", 
+            "label": "Description Size", 
+            "options": [
+                {
+                    "value": "h2", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h0", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h1"
+        },
+        {
+            "type":"select", 
+            "id": "heading_size_mobile", 
+            "label": "Heading Size", 
+            "options": [
+                {
+                    "value": "h3", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h2", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h2"
+        },
+        {
+            "type":"select", 
+            "id": "desc_size_mobile", 
+            "label": "Description Size", 
+            "options": [
+                {
+                    "value": "h5", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h4", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h3", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h4"
+        }
+    ], 
+    "presets": [
+        {
+            "name": "Newsletter"
+        }
+    ]
+}
+{% endschema %}

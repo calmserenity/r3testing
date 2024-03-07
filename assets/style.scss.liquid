@@ -9,7 +9,7 @@ $white: #ffffff;
 }
 
 .h4{
-    font-size: 1em; 
+    font-size: 0.9em; 
 }
 
 .h3{
@@ -391,8 +391,9 @@ img, svg {
     left: 50%; 
     transform: translate(-50%, 0%); 
     width: 90vw;
-    height: 40vh; 
+    height: 50vh; 
     background-color: #ffffff; 
+    box-shadow: 6px 5px 6px 5px rgba(0,0,0,0.36);
 }
 
 .aboutus-content-container h3{
@@ -423,5 +424,87 @@ img, svg {
 
 .aboutus-boxcontent h3{
     text-align: center; 
+}
+
+/* newsletter */ 
+.newsletter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.newsletter-image {
+    position: relative;
+    max-width: 100%; 
+}
+
+.newsletter-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1; 
+
+    @media only screen and (max-width: 749px){
+        display: none; 
+    }
+}
+
+.newsletter-content-mobile{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1; 
+    line-height: 2.0; 
+
+    @media only screen and (min-width: 749px){
+        display: none;
+    }
+}
+
+.newsletter-image img{
+    width: 100vw; 
+    height: 80vh;   
+    object-fit: cover; 
+    opacity: 0.9; 
+
+    @media only screen and (max-width: 749px){
+        width: 100vw; 
+        height: 40vh; 
+        margin-top: 30vh; 
+    }
+}
+
+
+.newsletter-content h3{
+    text-align: center;
+}
+
+.newsletter-container button{
+    display: none; 
+}
+
+.newsletter-content input{
+    border: 2px solid black; 
+    width: 30vw; 
+    height: 6vh; 
+    background-color: transparent; 
+    margin: 2vh 0; 
+    padding: 2vh 1vw; 
+    outline: none; 
+}
+
+.newsletter-content-mobile input{
+    border: 2px solid black; 
+    width: 50vw; 
+    height: 5vh; 
+    background-color: transparent; 
+    margin: 2vh 0; 
+    padding: 2vh 1vw; 
+    outline: none; 
 }
 
