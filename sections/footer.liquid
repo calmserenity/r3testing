@@ -1,0 +1,337 @@
+<div class = "footer-container desktop"> 
+    <div class="footer-headerlogo"> 
+        <a href="/" class="header-logo"> 
+            <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ site.name }}">
+        </a> 
+        <h2 style="color: {{section.settings.font_color}};" class="{{section.settings.heading_size}}">{{section.settings.footer_heading}}</h2>
+    </div> 
+    <div class="footer-wrapper"> 
+        <div class= "footer-container-row"> 
+            <div class = "footer-social">
+                {% for block in section.blocks %}
+                    <li class="list-social-item">
+                        {% if block.settings.insta_icon_id %}
+                            <a href="{{ block.settings.social_instagram_link }}" class="social-link">
+                                {% include 'icon-instagram' %}
+                                <h4 style="color: {{block.settings.social_font_color}};" class="{{block.settings.social_heading_size}}">{{block.settings.insta_name}}</h4> 
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="list-social-item">
+                        {% if block.settings.tiktok_icon_id %}
+                            <a href="{{ block.settings.social_tiktok_link }} " class="social-link">
+                                {% include 'icon-tiktok' %}
+                                <h4 style="color: {{block.settings.social_font_color}};" class="{{block.settings.social_heading_size}}">{{block.settings.tiktok_name}}</h4> 
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="list-social-item">
+                        {% if block.settings.email_icon_id %}
+                        <a href="{{ block.settings.social_email_link }}" class="social-link">
+                            {% include 'icon-email' %}
+                            <h4 style="color: {{block.settings.social_font_color}};" class="{{block.settings.social_heading_size}}">{{block.settings.email_name}}</h4> 
+                        </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </div> 
+        </div> 
+        <div class="footer-container-row"> 
+            <div class="footer-menu"> 
+                {% for link in section.settings.navigation.links %}
+                    <li class="footer-menu-item"> 
+                        <a class="footer-menu-nav" href="{{ link.url }}"> 
+                            <h4 style="color: {{section.settings.menu_font_color}};" class="{{section.settings.menu_heading_size}}">{{ link.title }}<h4>
+                        </a> 
+                    </li> 
+                {% endfor %}
+            </div> 
+        </div> 
+    </div> 
+</div> 
+
+<div class = "footer-container mobile"> 
+    <div class="footer-headerlogo"> 
+        <a href="/" class="header-logo"> 
+            <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ site.name }}">
+        </a> 
+        <h2 style="color: {{section.settings.font_color}};" class="{{section.settings.mobile_heading_size}}">{{section.settings.footer_heading}}</h2>
+    </div> 
+    <div class="footer-wrapper"> 
+        <div class= "footer-container-row"> 
+            <div class = "footer-social">
+                {% for block in section.blocks %}
+                    <li class="list-social-item">
+                        {% if block.settings.insta_icon_id %}
+                            <a href="{{ block.settings.social_instagram_link }}" class="social-link">
+                                {% include 'icon-instagram-mobile' %}
+                                <h4 style="color: {{block.settings.social_font_color}};" class="{{block.settings.mobile_social_heading_size}}">{{block.settings.insta_name}}</h4> 
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="list-social-item">
+                        {% if block.settings.tiktok_icon_id %}
+                            <a href="{{ block.settings.social_tiktok_link }} " class="social-link">
+                                {% include 'icon-tiktok-mobile' %}
+                                <h4 style="color: {{block.settings.social_font_color}};" class="{{block.settings.mobile_social_heading_size}}">{{block.settings.tiktok_name}}</h4> 
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li class="list-social-item">
+                        {% if block.settings.email_icon_id %}
+                        <a href="{{ block.settings.social_email_link }}" class="social-link">
+                            {% include 'icon-email-mobile' %}
+                            <h4 style="color: {{block.settings.social_font_color}};" class="{{block.settings.mobile_social_heading_size}}">{{block.settings.email_name}}</h4> 
+                        </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </div> 
+        </div> 
+        <div class="footer-container-row"> 
+            <div class="footer-menu"> 
+                {% for link in section.settings.navigation.links %}
+                    <li class="footer-menu-item"> 
+                        <a class="footer-menu-nav" href="{{ link.url }}"> 
+                            <h4 style="color: {{section.settings.menu_font_color}};" class="{{section.settings.mobile_menu_heading_size}}">{{ link.title }}<h4>
+                        </a> 
+                    </li> 
+                {% endfor %}
+            </div> 
+        </div> 
+    </div> 
+</div> 
+
+<style>
+.footer-container{
+    background-color: {{section.settings.Footer_background_color}}
+}
+</style>
+
+{% schema %}
+{
+    "name": "Footer", 
+    "tag": "footer", 
+    "class": "footer",
+    "settings": [
+        {
+            "type": "color", 
+            "id": "Footer_background_color", 
+            "label": "Footer Background Color"
+        },
+        {
+            "type": "image_picker", 
+            "id": "logo", 
+            "label": "Logo"
+        },
+        {
+            "type": "link_list", 
+            "id": "navigation", 
+            "label": "Navigation menu"
+        }, 
+        {
+            "type":"select", 
+            "id": "menu_heading_size", 
+            "label": "Menu Heading Size", 
+            "options": [
+                {
+                    "value": "h4", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h3", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h2", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h3"
+        }, 
+        {
+            "type":"select", 
+            "id": "mobile_menu_heading_size", 
+            "label": "Mobile Menu Heading Size", 
+            "options": [
+                {
+                    "value": "h5", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h4", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h3", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h4"
+        }, 
+        {
+            "type": "color",
+            "id": "menu_font_color",
+            "label": "Menu Font Color", 
+            "default": "#ffffff"
+        },
+        {
+            "type": "text", 
+            "id": "footer_heading", 
+            "label": "Heading Text"
+        },
+        {
+            "type":"select", 
+            "id": "heading_size", 
+            "label": "Heading Size", 
+            "options": [
+                {
+                    "value": "h2", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h0", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h1"
+        }, 
+        {
+            "type":"select", 
+            "id": "mobile_heading_size", 
+            "label": "Mobile Heading Size", 
+            "options": [
+                {
+                    "value": "h2", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h0", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h1"
+        }, 
+        {
+            "type": "color",
+            "id": "font_color",
+            "label": "Heading Font Color", 
+            "default": "#ffffff"
+        }
+    ],
+    "blocks":[
+        {
+            "type": "icons", 
+            "name": "Social Icons", 
+            "settings": [
+                {
+                    "type": "url", 
+                    "id": "social_instagram_link",
+                    "label": "Instagram Link"
+                },
+                {
+                    "type": "text", 
+                    "id": "insta_name", 
+                    "label": "Instagram Name"
+                },
+                {
+                    "type": "checkbox", 
+                    "id": "insta_icon_id", 
+                    "label": "Instagram Social Icons Display",
+                    "default": false
+                },
+                {
+                    "type": "url", 
+                    "id": "social_tiktok_link",
+                    "label": "Tiktok Link"
+                },
+                {
+                    "type": "text", 
+                    "id": "tiktok_name", 
+                    "label": "Tiktok Name"
+                },
+                {
+                    "type": "checkbox", 
+                    "id": "tiktok_icon_id", 
+                    "label": "TikTok Social Icon Display",
+                    "default": false
+                },
+                {
+                    "type": "url", 
+                    "id": "social_email_link",
+                    "label": "Email Link"
+                },
+                {
+                    "type": "text", 
+                    "id": "email_name", 
+                    "label": "Email Name"
+                },
+                {
+                    "type": "checkbox", 
+                    "id": "email_icon_id", 
+                    "label": "Email Social Icon Display",
+                    "default": false
+                },
+                {
+                    "type":"select", 
+                    "id": "social_heading_size", 
+                    "label": "Socials Heading Size", 
+                    "options": [
+                        {
+                            "value": "h4", 
+                            "label": "Small"
+                        }, 
+                        {
+                            "value": "h3", 
+                            "label": "Medium"
+                        }, 
+                        {
+                            "value": "h2", 
+                            "label": "Big"
+                        }
+                    ], 
+                    "default": "h3"
+                }, 
+                {
+                    "type":"select", 
+                    "id": "mobile_social_heading_size", 
+                    "label": "Mobile Socials Heading Size", 
+                    "options": [
+                        {
+                            "value": "h4", 
+                            "label": "Small"
+                        }, 
+                        {
+                            "value": "h3", 
+                            "label": "Medium"
+                        }, 
+                        {
+                            "value": "h2", 
+                            "label": "Big"
+                        }
+                    ], 
+                    "default": "h3"
+                }, 
+                {
+                    "type": "color",
+                    "id": "social_font_color",
+                    "label": "Font Color", 
+                    "default": "#ffffff"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+
+
+
