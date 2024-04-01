@@ -1,25 +1,27 @@
-<div class="aboutus-container"> 
-    <div class="aboutus-image"> 
-        <img src="{{ section.settings.aboutus_banner | img_url: 'master'}}" alt="{{ site.name }}">
-    </div> 
-    <div class="aboutus-content-container"> 
-        <div class="aboutus-content"> 
-            <h3 style="color:{{section.settings.content_text_color}};" class="{{section.settings.heading_size}}">{{section.settings.aboutus_heading}}</h3> 
-            <h3 style="color: {{section.settings.content_text_color}};" class="{{section.settings.text_size}}">{{section.settings.aboutus_content}}</h3> 
+<a name="aboutus">
+    <div class="aboutus-container"> 
+        <div class="aboutus-image"> 
+            <img src="{{ section.settings.aboutus_banner | img_url: 'master'}}" alt="{{ site.name }}">
+        </div> 
+        <div class="aboutus-content-container"> 
+            <div class="aboutus-content"> 
+                <h3 style="color:{{section.settings.content_text_color}};" class="{{section.settings.heading_size}}">{{section.settings.aboutus_heading}}</h3> 
+                <h3 style="color: {{section.settings.content_text_color}};" class="{{section.settings.text_size}}">{{section.settings.aboutus_content}}</h3> 
+            </div> 
         </div> 
     </div> 
-</div> 
 
-{% for block in section.blocks %}
-    {% if block.type=='aboutus' %}
-        <div class="aboutus-desktop-box" style="background-color: {{block.settings.desktop_aboutus_bg}};"> 
-            <div class="aboutus-boxcontent"> 
-                <h3 style="color:{{block.settings.content_text_color}};" class="{{block.settings.heading_size}}">{{section.settings.aboutus_heading}}</h3> 
-                <h3 style="color: {{block.settings.content_text_color}};" class="{{block.settings.text_size}}">{{section.settings.aboutus_content}}</h3> 
+    {% for block in section.blocks %}
+        {% if block.type=='aboutus' %}
+            <div class="aboutus-desktop-box" style="background-color: {{block.settings.desktop_aboutus_bg}};"> 
+                <div class="aboutus-boxcontent"> 
+                    <h3 style="color:{{block.settings.content_text_color}};" class="{{block.settings.heading_size}}">{{section.settings.aboutus_heading}}</h3> 
+                    <h3 style="color: {{block.settings.content_text_color}};" class="{{block.settings.text_size}}">{{section.settings.aboutus_content}}</h3> 
+                </div>
             </div>
-        </div>
-    {% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
+</a> 
 
 
 {% schema %}

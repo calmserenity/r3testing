@@ -1,8 +1,9 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 $width: {{ settings.page_width }}px; 
 $blacktext: {{ settings.text_color}};
 $bp: 750px; 
-$white: #ffffff; 
+
 
 .h5{
     font-size: 0.8em; 
@@ -59,6 +60,16 @@ html, body{
     padding: 0; 
     overflow: none; 
     overflow-x: none; 
+
+    @media only screen and (min-width: 749px){
+        font-family: 'Oswald', sans-serif;
+        height: 100%; 
+        width: 100%;
+        margin: 0; 
+        padding: 0; 
+        overflow: none; 
+        overflow-x: hidden; 
+    }
 }
 
 a{
@@ -70,7 +81,7 @@ li{
     list-style: none; 
 }
 
-img, svg {
+img {
     display: block; 
     width: 100px; 
 }
@@ -84,8 +95,8 @@ img, svg {
 .pc-header{
     max-width: $width; 
     width: calc(100% - 40px); 
-    margin:0 auto; 
-    background: $white; 
+    margin: auto;
+    background: #ffffff; 
 
     @media only screen and (max-width: 749px){ 
         display: none; 
@@ -103,17 +114,22 @@ img, svg {
 
 }
 
-.icon-item svg{
-    display: block; 
-    width: 90px; 
-    margin-bottom: 2px; 
-
+.icon-item{
+    display: flex; 
+    flex-direction: row;
 }
 
 .menu-item{
     display: block; 
-    width: 90px; 
+    padding-left: 5vw;
 
+}
+
+.icon-item svg{
+    display: block;
+    width: 7vw;
+    padding-left: 50px;
+    margin-top: 2px;
 }
 
 .menu-nav{
@@ -230,7 +246,7 @@ img, svg {
 }
 
 .desktop-featured img{
-    width: 25vw; 
+    width: 35vw; 
     height: 65vh; 
     padding: 0.1313em 0; 
 
@@ -513,6 +529,12 @@ img, svg {
     width: 100vw; 
     height: 60vh; 
     margin-top: 10vh; 
+
+    @media screen and (max-width: 749px){
+        width: 100vw; 
+        height: 55vh; 
+        margin-top: 10vh; 
+    }
 }
 
 @media screen and (max-width: 749px) {
@@ -520,11 +542,11 @@ img, svg {
         display: none;
     }
     .list-social-item svg{
-        transform: translateX(-2vw); 
+        transform: translateX(10vw); 
     }
 
     .list-social-item h4{
-        margin-left: -10vw;
+        margin-left: 12vw;
     }
 }
 
@@ -576,6 +598,82 @@ img, svg {
 .footer-menu{
     padding-top: 2vh;
 }
+
+/*mobile-menu*/
+.m-menu{
+    position: fixed; 
+    bottom: 2vh; 
+    right: 2vw; 
+    z-index: 1000; 
+
+    @media only screen and (min-width: 750px){
+        display: none;
+    }
+}
+
+.menu-button h4{
+    font-weight: bold; 
+    font-size: 20px; 
+    
+}
+
+.menu-button{
+    border: none; 
+    width: 40vw; 
+    height: 8vh; 
+    border-radius: 20px; 
+    cursor: pointer;  
+}
+
+.menu-content{
+    display: flex;
+    flex-direction: row; 
+    wrap: nowrap; 
+    align-items:center;
+    justify-content:center;
+    gap: 2vw;
+}
+
+.m-menu svg{
+    width:8vw; 
+    height:8vh; 
+}
+
+.menu-popup{
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    padding: 20px; 
+    border-radius: 20px; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+    width: 80%; 
+    max-width: 60vw; 
+    z-index: 1001; 
+}
+
+.menu-popup .nav{
+    list-style-type: none; 
+    padding: 0; 
+}
+
+.m-menu-item{
+    margin-bottom: 1vh; 
+}
+
+.menu-nav-content{
+    display: flex;
+    flex-direction: row; 
+    wrap: nowrap; 
+    align-items:center;
+    justify-content:center;
+    gap: 4vw; 
+}
+
+.m-menu-nav{
+    text-decoration: none; 
+}
+
 
 
 

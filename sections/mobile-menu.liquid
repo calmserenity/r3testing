@@ -1,0 +1,107 @@
+<div class="m-menu">
+    <button class="menu-button">
+        <div class="menu-content"> 
+            {% include 'icon-hamburger-menu' %}
+            <h4>MENU</h4>
+        </div> 
+    </button>
+    <div class="menu-popup" style="display: none;">
+        <div class="nav">
+            {% for link in section.settings.navigation.links %}
+                <li class="m-menu-item">
+                    <a class="m-menu-nav" href="{{ link.url }}">
+                        <div class="menu-nav-content">
+                            <h4 style="color: {{section.settings.menu_font_color}};" class="{{section.settings.mobile_menu_heading_size}}">{{ link.title }}</h4>
+                            {% include 'icon-arrow' %}
+                        </div> 
+                    </a>
+                </li>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+ 
+
+<style>
+.menu-popup{
+    background-color: {{section.settings.Menu_Background_Color}}; 
+}
+
+.menu-button{
+    background-color: {{section.settings.menu_button_color}}; 
+    color: {{section.settings.button_font_color}}; 
+}
+
+</style> 
+
+<script> 
+document.querySelector('.menu-button').addEventListener('click', function(){
+    var popup= document.querySelector('.menu-popup'); 
+    if (popup.style.display==='none'){
+        popup.style.display='block'; 
+    }
+    else{
+        popup.style.display= 'none'; 
+    }
+})
+</script> 
+
+{% schema %}
+{
+    "name": "Menu_Button", 
+    "class": "Menu_Button", 
+    "settings": [
+        {
+            "type": "color", 
+            "id": "Menu_Background_Color", 
+            "label": "Background Color"
+        }, 
+        {
+            "type": "color", 
+            "id": "menu_button_color", 
+            "label": "Button Color"
+        }, 
+        {
+            "type": "color",
+            "id": "button_font_color",
+            "label": "Button Font Color"
+        },
+        {
+            "type": "link_list", 
+            "id": "navigation", 
+            "label": "Navigation Menu"
+        }, 
+        {
+            "type":"select", 
+            "id": "mobile_menu_heading_size", 
+            "label": "Mobile Menu Heading Size", 
+            "options": [
+                {
+                    "value": "h5", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h4", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h3", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h4"
+        }, 
+        {
+            "type": "color",
+            "id": "menu_font_color",
+            "label": "Menu Font Color", 
+            "default": "#ffffff"
+        }
+    ], 
+    "presets":[
+        {
+            "name": "Mobile Menu"
+        }
+    ]
+}
+{% endschema %}
