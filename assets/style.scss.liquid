@@ -93,10 +93,10 @@ img {
 /*header*/ 
 
 .pc-header{
-    max-width: $width; 
-    width: calc(100% - 40px); 
-    margin: auto;
+    width: 100vw;
+    padding-bottom: 3vh; 
     background: #ffffff; 
+    box-shadow: 0 4px 8px -1px rgba(0,0,0,0.2);
 
     @media only screen and (max-width: 749px){ 
         display: none; 
@@ -107,6 +107,8 @@ img {
     display: flex; 
     align-items: center; 
     justify-content: space-between; 
+    max-width: $width; 
+    margin: auto; 
 }
 
 .menu{
@@ -193,6 +195,7 @@ img {
     position: relative; 
     overflow: hidden; 
     margin-bottom: 3vh; 
+    margin-top: -3vh; 
 
     @media only screen and (max-width: 749px){
         display: none; 
@@ -249,10 +252,12 @@ img {
     width: 35vw; 
     height: 65vh; 
     padding: 0.1313em 0; 
+    object-fit: cover; 
 
     @media only screen and (max-width: 749px){
         width: 45vw; 
         height: 30vh; 
+        object-fit: cover; 
     }
 }
 
@@ -407,7 +412,6 @@ img {
     left: 50%; 
     transform: translate(-50%, 0%); 
     width: 90vw;
-    height: 50vh; 
     background-color: #ffffff; 
     box-shadow: 6px 5px 6px 5px rgba(0,0,0,0.36);
 }
@@ -424,7 +428,7 @@ img {
 .aboutus-desktop-box{
     margin: 10vh 20vw; 
     width: 60vw; 
-    height: 50vh; 
+    height: 60vh; 
 
      @media only screen and (max-width: 749px){
         display: none; 
@@ -593,6 +597,7 @@ img {
 .social-link {
     display: flex;
     align-items: center;
+    gap: 2vw;
 }
 
 .footer-menu{
@@ -674,6 +679,55 @@ img {
     text-decoration: none; 
 }
 
+/* shop.liquid */
+.shop_page{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    gap: 3vh;
+    margin-top: 3vh; 
 
+    @media only screen and (max-width: 749px){
+        display: none;
+    }
+}
 
+.shop_banner img{
+    width: 100vw; 
+    height: 70vh;
+    object-fit: cover; 
+}
 
+.shop_products{
+    margin-top: 5vh; 
+    margin-left: 10vw; 
+}
+
+.shop_products img{
+    width: 35vw; 
+    height: 80vh; 
+    padding: 2em 0; 
+    object-fit: cover; 
+}
+
+.shop-row{
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center; 
+    width: 100%; 
+}
+
+.shop-column{
+    flex: 0 0 50%; 
+    max-width: 50%; 
+}
+
+.shop-imageslide{
+    padding: 0 0.563em; 
+}
+
+.shop-imageslide h3{
+    padding: 5px 0; 
+}

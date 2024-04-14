@@ -1,0 +1,85 @@
+<div class="shop_page"> 
+    <div class="shop_heading"> 
+        <h1> {{section.settings.page_heading}} </h1>
+    </div> 
+    <div class="shop_banner"> 
+        <img src="{{ section.settings.shop_banner | img_url: 'master'}}" class="shop_banner_cover" alt="{{ site.name }}">
+    </div> 
+    <div class="shop_products"> 
+        <div class="shop-row"> 
+            {% for product in collections['all-products'].products %}
+                <div class="shop-column"> 
+                    <div class="shop-imageslide"> 
+                        <a href= "{{ product.url}}"> 
+                            <img src= "{{ product.featured_image | image_url: width: 400}}"/> 
+                        </a>
+                        <h3 class="{{section.settings.title_size}}">{{ product.title}} </h3> 
+                        <p class="{{section.settings.price_size}}"> {{product.price | money }} </p>
+                    </div> 
+                </div> 
+            {% endfor %}
+        </div> 
+    </div> 
+</div> 
+
+
+
+{% schema %}
+{
+    "name": "shop", 
+    "settings": [
+        {
+            "type": "text", 
+            "id": "page_heading", 
+            "label": "Page Title"
+        },{
+            "type": "image_picker", 
+            "id": "shop_banner", 
+            "label": "Shop Banner"
+        },
+        {
+            "type": "select", 
+            "id": "title_size", 
+            "label": "Product Title Heading Size", 
+            "options": [
+                {
+                    "value": "h3", 
+                    "label": "Small"
+                },
+                {
+                    "value": "h2",
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Large"
+                }
+            ]
+        }, 
+        {
+            "type": "select", 
+            "id": "price_size", 
+            "label": "Product Price Heading Size", 
+            "options": [
+                {
+                    "value": "h5", 
+                    "label": "Small"
+                },
+                {
+                    "value": "h4",
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h3", 
+                    "label": "Large"
+                }
+            ]
+        }
+    ], 
+    "presets": [
+        {
+            "name": "Shop"
+        }
+    ]
+}
+{% endschema %}
