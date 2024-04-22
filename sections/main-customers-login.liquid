@@ -1,0 +1,46 @@
+<section id="login" class="login-container"> 
+    <h1>Log In</h1>
+    {% form 'customer_login' %}
+        {{ form.errors | default_errors }}
+
+        <div class="login_email"> 
+            <input type="email" name="customer[email]" placeholder=" Email"> 
+        </div> 
+
+        <div class="login_password">
+            <input type="password" name="customer[password]" placeholder=" Password" autocomplete="new-password">
+        </div>
+
+        <a href="#recover" onclick="showRecoveryForm()" class="hover-link"> <p>Forget your password?</p> </a>
+        <p>Register <a href="{{routes.account_register_url}}" class="hover-link">here</a></p>
+
+        <div class="login_submit">
+            <input type="submit" value="Sign in">
+        </div>
+
+    {% endform %}
+</section> 
+
+<section id="recover"> 
+    <div class="recover-container">
+        <h1>RECOVER PASSWORD</h1>
+        {% form 'recover_customer_password' %}
+        {{ form.errors | default_errors }}
+
+        <div class="login_recover_email">
+            <input type="email" name="email" placeholder=" Email">
+        </div>
+
+        <div class="login_recover_submit">
+            <input type="submit" value="Submit">
+        </div>
+        {% endform %}
+    </div>
+</section> 
+
+<script> 
+function showRecoveryForm(){
+    document.getElementById('login').style.display='none'; 
+    document.getElementById('recover').style.display='block'; 
+}
+</script>

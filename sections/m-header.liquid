@@ -1,0 +1,117 @@
+<div class="mobile-header-two"> 
+    <div class="mobile-header-container">
+        <div class="mobile-logo-two"> 
+            <a href="/" class="m-logo-two"> 
+                <img src="{{ section.settings.mlogo | img_url: 'master' }}" alt="{{ site.name }}">
+            </a> 
+        </div> 
+        <div class="mobile-menu-two"> 
+            <button class="mobile-menu-button-two"> 
+                <div class="menu-content-two"> 
+                    {% include 'icon-hamburger-menu' %}
+                </div>
+            </button> 
+            <div class="menu-popup-two" style="display:none;"> 
+                <div class="menu-nav-two"> 
+                    {% for link in section.settings.navigation.links %}
+                        <li class="m-menu-item-two"> 
+                            <a class="m-menu-nav-two" href="{{link.url}}">
+                                <div class="menu-nav-content-two"> 
+                                    <h4 style="color: {{section.settings.menu_font_color}};" class="{{section.settings.mobile_menu_heading_size}}">{{ link.title }}</h4>
+                                    {% include 'icon-arrow' %}
+                                </div> 
+                            </a> 
+                        </li> 
+                    {% endfor %}
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<style> 
+.menu-popup-two{
+    background-color: {{section.settings.Menu_Background_Color}}; 
+}
+
+.mobile-menu-button-two{
+    background-color: {{section.settings.menu_button_color}}; 
+    color: {{section.settings.button_font_color}}; 
+}
+</style> 
+
+<script> 
+document.querySelector('.mobile-menu-button-two').addEventListener('click', function(){
+    var popup= document.querySelector('.menu-popup-two'); 
+    if (popup.style.display==='none'){
+        popup.style.display='block'; 
+    }
+    else{
+        popup.style.display= 'none'; 
+    }
+})
+</script> 
+
+{% schema %}
+{
+    "name": "mobile-header-two",
+    "settings": [
+        {
+            "type": "image_picker", 
+            "id": "mlogo", 
+            "label": "Mobile Logo"
+        },
+        {
+            "type": "link_list", 
+            "id": "navigation", 
+            "label": "Navigation Menu"
+        },
+        {
+            "type":"select", 
+            "id": "mobile_menu_heading_size", 
+            "label": "Mobile Menu Heading Size", 
+            "options": [
+                {
+                    "value": "h5", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h4", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h3", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h4"
+        }, 
+        {
+            "type": "color",
+            "id": "menu_font_color",
+            "label": "Menu Font Color", 
+            "default": "#ffffff"
+        },
+         {
+            "type": "color", 
+            "id": "Menu_Background_Color", 
+            "label": "Background Color"
+        }, 
+        {
+            "type": "color", 
+            "id": "menu_button_color", 
+            "label": "Button Color"
+        }, 
+        {
+            "type": "color",
+            "id": "button_font_color",
+            "label": "Button Font Color"
+        }
+    ], 
+    "presets": [
+        {
+            "name": "Mobile Header"
+        }
+    ]
+}
+{% endschema %}

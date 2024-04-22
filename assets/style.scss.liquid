@@ -731,3 +731,443 @@ img {
 .shop-imageslide h3{
     padding: 5px 0; 
 }
+
+/*main-customers-login.liquid*/
+
+#recover{
+    display: none; 
+}
+
+
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: solid 1px black;
+    background-color: #FAF8F8;
+    width: 40vw;
+    height: 60vh;
+    margin: auto;
+    margin-top: 5vh;
+
+    @media only screen and (max-width: 749px){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: solid 1px black;
+        background-color: #FAF8F8;
+        width: 80vw;
+        height: 60vh;
+        margin: auto;
+        margin-top: 5vh;
+    }
+}
+
+.login-container input{
+    margin: 3vh 0; 
+
+}
+
+.login_email input, .login_password input{
+    width: 20vw; 
+    height: 7vh; 
+    border-radius: 3px;
+    background-color: black;
+    color: white;
+
+    @media only screen and (max-width: 749px){
+        width: 60vw; 
+        height: 7vh; 
+        border-radius: 3px;
+        background-color: black; 
+        color: white; 
+    }
+}
+
+.login-container ::placeholder{
+    color: white;
+}
+
+.login_submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_submit input{
+    width: 10vw; 
+    height: 6vh;
+    background-color:#0F0F65;
+    color: white;
+
+    @media only screen and (max-width: 749px){
+        width: 30vw; 
+        height: 6vh; 
+        background-color: #0f0f65; 
+        color: white; 
+    }
+}
+
+.recover-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: solid 1px black;
+    background-color: #FAF8F8;
+    width: 40vw;
+    height: 60vh;
+    margin: auto;
+    margin-top: 5vh;
+
+    @media only screen and (max-width: 749px){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: solid 1px black;
+        background-color: #FAF8F8;
+        width: 80vw;
+        height: 60vh;
+        margin: auto;
+        margin-top: 5vh;
+    }
+}
+
+.recover-container input{
+    margin: 3vh 0; 
+}
+
+.login_recover_email input{
+    width: 20vw; 
+    height: 7vh; 
+    border-radius: 3px;
+    background-color: black;
+    color: white;
+
+    @media only screen and (max-width: 749px){
+        width: 60vw; 
+        height: 7vh; 
+        border-radius: 3px;
+        background-color: black; 
+        color: white; 
+    }
+}
+
+.recover-container ::placeholder{
+    color: white; 
+}
+
+.login_recover_submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_recover_submit input{
+     width: 10vw; 
+    height: 6vh;
+    background-color:#0F0F65;
+    color: white;
+
+    @media only screen and (max-width: 749px){
+        width: 30vw; 
+        height: 6vh; 
+        background-color: #0f0f65; 
+        color: white; 
+    }
+}
+
+.hover-link:hover{
+    color: red; 
+}
+
+
+/* m-header.liquid */
+.mobile-menu-two{
+    @media only screen and (min-width: 750px){
+        display: none;
+    }
+}
+
+.mobile-header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh 2vw; 
+
+    @media only screen and (min-width: 750px){
+        display: none;
+    }
+}
+
+.mobile-logo-two {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);    
+}
+
+.mobile-menu-two{
+    display: flex;
+    align-item: left;
+
+}
+
+.mobile-menu-button-two{
+    height: 6vh; 
+    width: 12vw; 
+    border-radius: 5px; 
+}
+
+.menu-nav-content-two{
+    display: flex;
+    flex-direction: row; 
+    wrap: nowrap; 
+    align-items:center;
+    justify-content:center;
+    gap: 2vw; 
+}
+
+.menu-popup-two{
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    padding: 20px; 
+    border-radius: 20px; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+    width: 80%; 
+    max-width: 60vw; 
+    z-index: 1001; 
+}
+
+.menu-popup-two svg{
+    width:8vw; 
+    height:8vh; 
+}
+
+/* register */ 
+.register-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: solid 1px black;
+    background-color: #FAF8F8;
+    width: 40vw;
+    height: 100vh;
+    margin: auto;
+    margin-top: 5vh;
+
+    @media only screen and (max-width: 749px){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: solid 1px black;
+        background-color: #FAF8F8;
+        width: 80vw;
+        height: 100vh;
+        margin: auto;
+        margin-top: 10vh;
+    }
+}
+
+.register-container input, .register-container select{
+    margin: 3vh 0; 
+}
+
+.register-first-name input, .register-last-name input, .register-email input, .register-password input, .register-country select{
+    width: 20vw; 
+    height: 7vh; 
+    border-radius: 3px;
+    background-color: #0F0F65;
+    color: white;
+
+    @media only screen and (max-width: 749px){
+        width: 60vw; 
+        height: 7vh; 
+        border-radius: 3px;
+        background-color: black; 
+        color: white; 
+    }
+}
+
+.register-container ::placeholder{
+    color: white;
+}
+
+.register-submit{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.register-submit input{
+    width: 10vw; 
+    height: 6vh;
+    background-color:black;
+    color: white;
+
+    @media only screen and (max-width: 749px){
+        width: 30vw; 
+        height: 6vh; 
+        background-color: #0f0f65; 
+        color: white; 
+    }
+}
+
+/* reset.liquid */ 
+.reset-password-container{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: solid 1px black;
+    background-color: #FAF8F8;
+    width: 40vw;
+    height: 60vh;
+    margin: auto;
+    margin-top: 5vh;
+
+    @media only screen and (max-width: 749px){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: solid 1px black;
+        background-color: #FAF8F8;
+        width: 80vw;
+        height: 60vh;
+        margin: auto;
+        margin-top: 5vh;
+    }
+}
+
+.reset-password-container input{
+    margin: 3vh 0; 
+}
+
+.reset-password input, .password_confirm input{
+     width: 20vw; 
+    height: 7vh; 
+    border-radius: 3px;
+    background-color: black;
+    color: white;
+
+    @media only screen and (max-width: 749px){
+        width: 60vw; 
+        height: 7vh; 
+        border-radius: 3px;
+        background-color: black; 
+        color: white; 
+    }
+}
+
+.reset-password-container ::placeholder{
+    color: white;
+}
+
+.reset-submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-submit button{
+    width: 10vw; 
+    height: 6vh;
+    background-color:#0F0F65;
+    color: white;
+
+    @media only screen and (max-width: 749px){
+        width: 30vw; 
+        height: 6vh; 
+        background-color: #0f0f65; 
+        color: white; 
+    }
+}
+
+/*account */ 
+.customer_page{
+    margin: 2vh 5vw; 
+}
+
+.customer_information_container{
+    display: flex; 
+    flex-direction: row; 
+    wrap: nowrap;
+    justify-content: space-between;
+
+    @media only screen and (max-width: 749px){
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center;       
+        align-items: center; 
+    }
+}
+
+.customer_information{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    border-radius: 10px;     
+    margin: 5vh 0; 
+    width: 30vw; 
+    max-height: 50vh;
+    
+    @media only screen and (max-width: 749px){
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        border-radius: 10px;     
+        margin: 5vh 0; 
+        width: 80vw; 
+        max-height: 80vh;
+    }
+}
+
+.customer_page table{
+    border-spacing: 2vw;
+
+    @media only screen and (max-width: 749px){
+        border-spacing: 4vw;    
+    }
+}
+
+.customer_order{
+    width: 50vw;
+    max-height: 100vh;
+    margin-top: 5vh;
+
+    @media only screen and (max-width:749px){
+        width: 95vw; 
+        max-height: 100vh; 
+        margin-top: 10vh;
+    }
+}
+
+
+.customer_order td{
+    text-align: left;
+
+    @media only screen and (max-width: 749px){
+        font-size: 15px;
+    }
+}
+
+.customer_order th{
+    text-align: left; 
+    @media only screen and (max-width: 749px){
+        text-align: left;
+    }
+}
+
+.customer_order h2{
+
+    @media only screen and (max-width: 749px){
+        text-align: center;
+    }
+}

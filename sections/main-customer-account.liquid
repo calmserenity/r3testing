@@ -1,0 +1,100 @@
+<div class="customer_page"> 
+    <h1>Welcome {{customer.first_name}}</h1>
+    <h1>{{customer.order_count}}</h1>
+    <hr>
+    <div class="customer_information_container">
+        <div class="customer_information">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>{{customer.name}}</td>
+                </tr>
+                <tr>
+                    <td>Email </td>
+                    <td>{{customer.email}}</td>
+                </tr>
+                <tr>
+                    <td>Location </td>
+                    <td>{{customer.default_address.country}}</td> 
+                </tr>
+                <tr>
+                    <td>Marketing </td>
+                    <td>
+                        {% if customer.accepts_marketing %}
+                            Accepts Marketing
+                        {% else %}
+                            Does not accept Marketing
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="customer_order"> 
+            {% if customer.orders.size > 0 %}
+            <h2>Your Order History</h2>
+            <hr>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in customer.orders %}
+                        <tr>
+                            <td>{{ order.name }}</td>
+                            <td>{{ order.created_at | date: "%B %d, %Y" }}</td>
+                            <td>{{ order.total_price | money }}</td>
+                            <td>
+                                <ul>
+                                {% for item in order.line_items %}
+                                    <li>{{ item.title }} - {{ item.quantity }} x {{ item.price | money }}</li>
+                                {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>You have not placed any orders yet.</p>
+            {% endif %}
+        </div>
+    </div> 
+</div>
+
+<style>
+.customer_information{
+    background-color: {{section.settings.background_color}}; 
+}
+
+.customer_information td{
+    color: {{section.settings.font_color}}; 
+}
+</style>
+
+{% schema %}
+{
+    "name": "account", 
+    "settings": [
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Customer Information Background Color"
+        }, 
+        {
+            "type": "color", 
+            "id": "font_color", 
+            "label": "Customer Information Font Color"
+        }
+    ], 
+    "presets": [
+        {
+            "name": "Account"
+        }
+    ]
+}
+{% endschema %}
