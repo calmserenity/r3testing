@@ -1,1 +1,192 @@
-<h1> HI </h1> 
+<div class="product"> 
+    <div class="product-container"> 
+        <div class="product-left">
+            {% if product.selected_or_first_available_variant.featured_image %}
+                {% assign featured = product.selected_or_first_available_variant.featured_image %}
+                <img id="product-image" src="{{ featured | img_url: 'large' }}" alt="{{ featured.alt | escape }}">
+            {% else %}
+                {% assign featured = product.featured_image %}
+                <img id="product-image" src="{{ featured | img_url: 'large' }}" alt="{{ featured.alt | escape }}">
+            {% endif %}
+
+            <ul class="product-image-thumbs">
+                {% for image in product.images %}
+                <li class="{% if image == featured %}selected{% endif %}">
+                    <img src="{{ image | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                </li>
+                {% endfor %}
+            </ul>
+         </div>
+
+        <div class="product-right"> 
+            <h1>{{product.title}}</h1>
+
+            <div class="product-prices">
+                <p class="product-compare" {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}hide {%endunless%}> 
+                    {{ product.selected_or_first_available_variant.compare_at_price | money }}
+                </p> 
+                <p class="product-price"> 
+                    {{product.selected_or_first_available_variant.price | money }}
+                </p>
+            </div> 
+
+            {% form 'product', product %}
+                <input id="product-id" type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}">                
+                {% if product.variants.size > 1 %}
+                    <div class="product-option"> 
+                        {% for option in product.options_with_values %}
+                            <fieldset>
+                                <legend>{{option.name}}</legend> 
+                                {% for value in option.values %}
+                                    <div> 
+                                        <input
+                                            type="radio"
+                                            name="{{option.name}}"
+                                            value="{{value}}"
+                                            id="{{option.name | handlize}}-{{value | handlize}}"
+                                            {% if option.selected_value == value %}checked{% endif %}
+                                        >
+                                        <label for="{{option.name | handlize}}-{{value | handlize}}">
+                                            {{value}}
+                                        </label>
+                                    </div> 
+                                {% endfor %}
+                            </fieldset>
+                        {% endfor %}
+                    </div> 
+                {% endif %}
+
+                <div class="product-option"> 
+                    <label for="quantity"> Quantity </label> 
+                    <div> 
+                        <div class="quantity-selector"> 
+                            <button type="button" class="quantity-selector-minus"> 
+                                {% include 'icon-minus.liquid' %}
+                            </button> 
+                            <input
+                                id="quantity"
+                                name="quantity"
+                                value="1"
+                                class="quantity-selector-input"
+                            />
+                            <button type="button" class="quantity-selector-plus"> 
+                                {% include 'icon-plus.liquid' %}
+                            </button>
+                        </div> 
+                    </div> 
+                </div> 
+
+                <button {% unless product.selected_or_first_available_variant.available %}disabled {% endunless %} id= "add-to-cart" type="submit" class="product-add"> 
+                    {% if product.selected_or_first_available_variant.available %}
+                        Add to Cart
+                    {% else %}
+                        Out of stock
+                    {% endif %}
+                </button> 
+
+            {% endform %}
+        </div> 
+    </div> 
+</div> 
+
+<script>
+var product = {{ product | json }}
+
+document.querySelectorAll('.product-option input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        //find selected options
+        var selectedOptions = []
+
+        document.querySelectorAll('.product-option input[type="radio"]:checked').forEach(radio => {
+            selectedOptions.push(radio.value)
+        })
+
+        //finding matched variants
+        var matchedVariant = product.variants.find(variant => {
+            var pass = true
+
+            for (var i= 0; i< selectedOptions.length; i++){
+                if (selectedOptions.indexOf(variant.options[i]) === -1){
+                    pass = false 
+                    break
+                }
+            }
+
+            return pass 
+        })
+
+        //change product from variant id
+        document.querySelector('#product-id').value=matchedVariant.id
+
+        var url = new URLParse(window.location.href, true)
+        url.query.variant=matchedVariant.id
+        window.history.replaceState(null, null, url.toString());
+
+        //price change 
+        document.querySelector('.product-price').textContent = formatMoney(matchedVariant.price, "{{ shop.money_format }}")
+        document.querySelector('.product-compare').textContent = formatMoney(matchedVariant.compare_at_price, "{{ shop.money_format }}")
+
+        matchedVariant.compare_at_price > matchedVariant.price ? 
+            document.querySelector('.product-compare').classList.remove('hide') :
+            document.querySelector('.product-compare').classList.add('hide');
+
+        //change image 
+        if (matchedVariant.featured_image){ 
+            document.querySelector('#product-image').setAttribute('src', matchedVariant.featured_image.src)
+            const changeThumbnail= document.querySelector('.product-image-thumbs li.selected'); 
+            changeThumbnail.classList.remove('selected'); 
+            document.querySelectorAll('.product-image-thumbs li')[matchedVariant.featured_image.position - 1].classList.add('selected')
+        }
+
+        //change button 
+        var add = document.querySelector("#add-to-cart")
+
+        if (matchedVariant.available){ 
+            add.textContent="Add to Cart"
+            add.disabled=false
+        }
+        else{
+            add.textContent="Out of Stock"
+            add.disabled=true
+        }
+    })
+})
+
+document.querySelectorAll('.product-image-thumbs li').forEach(li => {
+  li.addEventListener('click', () => {
+    const selectedThumbnail = document.querySelector('.product-image-thumbs li.selected');
+    if (selectedThumbnail) {
+      selectedThumbnail.classList.remove('selected');
+    }
+    li.classList.add('selected');
+
+    const thumbnailImageUrl = li.querySelector('img').getAttribute('src');
+    const largeImageUrl = thumbnailImageUrl.replace('compact', 'large');
+    document.querySelector('#product-image').setAttribute('src', largeImageUrl);
+  });
+});
+
+document.querySelector('.quantity-selector-plus').addEventListener('click', () =>{
+    var currentVal=Number(document.querySelector('#quantity').value)
+    document.querySelector('#quantity').value=currentVal + 1
+})
+
+document.querySelector('.quantity-selector-minus').addEventListener('click', () =>{
+    var currentVal=Number(document.querySelector('#quantity').value)
+
+    if (currentVal > 1){
+        document.querySelector('#quantity').value=currentVal - 1
+    }
+})
+</script>
+
+{% schema %}
+{
+    "name": "Product", 
+    "presets": [
+        {
+            "name": "Product"
+        }
+    ]
+}
+{% endschema %}
