@@ -1,0 +1,126 @@
+<div class="cart">
+  {% form 'cart', cart %}
+    <section class="cart-sec">
+      {% if cart.empty? %}
+        <div class="empty-cart">
+          <p>CART IS EMPTY</p>
+        </div>
+      {% else %}
+        <div class="cart-info">
+          <div class="cart-left">
+            {% for item in cart.items %}
+              <div class="cart-container">
+                <div class="cart-left-pic">
+                  <img loading="lazy" src="{{ item.image | image_url }}">
+                </div>
+                <div class="cart-left-info">
+                  <h1>{{ item.product.title }}</h1>
+                  <h3>{{ item.variant.title }}</h3>
+                  <h3>{{ item.final_line_price | money }}</h3>
+                  <h3>Qty: {{item.quantity}}
+                    <div class="cart-quantity">
+                      <div class="quantity-selector">
+                        <button type="button" class="quantity-selector-minus" data-key="{{ item.key }}">
+                          {% include 'icon-minus.liquid' %}
+                        </button>
+                        <input id="quantity-{{ item.key }}" name="updates[]" value="{{ item.quantity }}" class="quantity-selector-input">
+                        <button type="button" class="quantity-selector-plus" data-key="{{ item.key }}">
+                          {% include 'icon-plus.liquid' %}
+                        </button>
+                      </div>
+                    </div>
+                    <div class="remove-item">
+                      <button><a href="{{ item.url_to_remove }}"><p>remove</p></a></button>
+                    </div>
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="cart-right">
+            <div class="cart-total-price">
+              <h3>Summary</h3>
+              <table>
+                <tr>
+                  <td class="subtotal">Subtotal</td>
+                  <td>{{ cart.total_price | money }}</td>
+                </tr>
+              </table>
+            </div>
+            <div class="button-end">
+              <div>
+                <button type="submit" name="checkout">Checkout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </section>
+  {% endform %}
+</div>
+
+<style>
+.remove-item button{
+  background-color: {{section.settings.button_bg_color}}; 
+}
+
+.remove-item p{
+  color: {{section.settings.text_color}};
+}
+
+.button-end button{
+  background-color: {{section.settings.button_bg_color}}; 
+  color: {{section.settings.text_color}};
+}
+
+.button-end p{
+    color: {{section.settings.text_color}};
+}
+</style>
+
+<script>
+  document.querySelectorAll('.quantity-selector').forEach(selector => {
+    selector.addEventListener('click', (event) => {
+      const button = event.target.closest('button');
+      if (!button) return;
+
+      const itemKey = button.dataset.key;
+      const input = document.getElementById(`quantity-${itemKey}`);
+      const currentVal = Number(input.value);
+
+      if (button.classList.contains('quantity-selector-plus')) {
+        input.value = currentVal + 1;
+      } else if (button.classList.contains('quantity-selector-minus')) {
+        if (currentVal > 1) {
+          input.value = currentVal - 1;
+        }
+      }
+
+      // Submit the form when the quantity changes
+      input.closest('form').submit();
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "cart",
+    "settings": [
+      {
+        "type": "color",
+        "id": "button_bg_color",
+        "label": "Button Background Color"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Button Font Color"
+      }
+    ],
+    "presets": [
+      {
+        "name": "cart"
+      }
+    ]
+  }
+{% endschema %}

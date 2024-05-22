@@ -1,34 +1,27 @@
 <div class="product"> 
     <div class="product-container"> 
         <div class="product-left">
-            {% if product.selected_or_first_available_variant.featured_image %}
-                {% assign featured = product.selected_or_first_available_variant.featured_image %}
-                <img id="product-image" src="{{ featured | img_url: 'large' }}" alt="{{ featured.alt | escape }}">
-            {% else %}
-                {% assign featured = product.featured_image %}
-                <img id="product-image" src="{{ featured | img_url: 'large' }}" alt="{{ featured.alt | escape }}">
-            {% endif %}
-
             <ul class="product-image-thumbs">
                 {% for image in product.images %}
                 <li class="{% if image == featured %}selected{% endif %}">
-                    <img src="{{ image | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                    <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt | escape }}">
                 </li>
                 {% endfor %}
             </ul>
+
+            <div class="product-featured-image"> 
+                {% if product.selected_or_first_available_variant.featured_image %}
+                    {% assign featured = product.selected_or_first_available_variant.featured_image %}
+                    <img id="product-image" src="{{ featured | img_url: 'master' }}" alt="{{ featured.alt | escape }}">
+                {% else %}
+                    {% assign featured = product.featured_image %}
+                    <img id="product-image" src="{{ featured | img_url: 'master' }}" alt="{{ featured.alt | escape }}">
+                {% endif %}
+            </div>
          </div>
 
         <div class="product-right"> 
-            <h1>{{product.title}}</h1>
-
-            <div class="product-prices">
-                <p class="product-compare" {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}hide {%endunless%}> 
-                    {{ product.selected_or_first_available_variant.compare_at_price | money }}
-                </p> 
-                <p class="product-price"> 
-                    {{product.selected_or_first_available_variant.price | money }}
-                </p>
-            </div> 
+            <h1 class="product-title">{{product.title}}</h1>
 
             {% form 'product', product %}
                 <input id="product-id" type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}">                
@@ -36,27 +29,31 @@
                     <div class="product-option"> 
                         {% for option in product.options_with_values %}
                             <fieldset>
-                                <legend>{{option.name}}</legend> 
-                                {% for value in option.values %}
-                                    <div> 
-                                        <input
-                                            type="radio"
-                                            name="{{option.name}}"
-                                            value="{{value}}"
-                                            id="{{option.name | handlize}}-{{value | handlize}}"
-                                            {% if option.selected_value == value %}checked{% endif %}
-                                        >
-                                        <label for="{{option.name | handlize}}-{{value | handlize}}">
-                                            {{value}}
-                                        </label>
-                                    </div> 
-                                {% endfor %}
+                                <div class="option-label"> 
+                                    <legend>{{option.name}}</legend> 
+                                </div>
+                                <div class="option-choice">
+                                    {% for value in option.values %}
+                                        <div> 
+                                            <input
+                                                type="radio"
+                                                name="{{option.name}}"
+                                                value="{{value}}"
+                                                id="{{option.name | handlize}}-{{value | handlize}}"
+                                                {% if option.selected_value == value %}checked{% endif %}
+                                            >
+                                            <label for="{{option.name | handlize}}-{{value | handlize}}">
+                                                {{value}}
+                                            </label>
+                                        </div> 
+                                    {% endfor %}
+                                </div>
                             </fieldset>
                         {% endfor %}
                     </div> 
                 {% endif %}
 
-                <div class="product-option"> 
+                <div class="product-option-quantity"> 
                     <label for="quantity"> Quantity </label> 
                     <div> 
                         <div class="quantity-selector"> 
@@ -76,20 +73,62 @@
                     </div> 
                 </div> 
 
-                <button {% unless product.selected_or_first_available_variant.available %}disabled {% endunless %} id= "add-to-cart" type="submit" class="product-add"> 
-                    {% if product.selected_or_first_available_variant.available %}
-                        Add to Cart
-                    {% else %}
-                        Out of stock
-                    {% endif %}
-                </button> 
-
+                <div class="product-prices">
+                    <p class="product-compare" {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}hide {%endunless%}> 
+                        {{ product.selected_or_first_available_variant.compare_at_price | money }}
+                    </p> 
+                    <p class="product-price"> 
+                        {{product.selected_or_first_available_variant.price | money }}
+                    </p>
+                </div> 
+                
+                <div class="add_to_cart_button"> 
+                    <button {% unless product.selected_or_first_available_variant.available %}disabled {% endunless %} id= "add-to-cart" type="submit" class="product-add"> 
+                        {% if product.selected_or_first_available_variant.available %}
+                            <p class="abled">Add to Cart</p>
+                        {% else %}
+                            <p>Out of stock</p>
+                        {% endif %}
+                    </button> 
+                </div>
             {% endform %}
+
+            <div class="product-description"> 
+                    <table>
+                        <tr class="desc-dropdown">
+                            <h3>
+                                <td class="desc-title">ITEM DESCRIPTION</td>
+                                <td class="desc-icon">{% include 'icon-dropdown.liquid' %}</td>
+                            </h3>
+                        </tr>
+                    </table>
+                        <h5 class="desc-pro">{{product.description}}</h5>
+                </div> 
+            </div> 
         </div> 
     </div> 
 </div> 
 
+
+
+<style>
+.desc-pro{
+    background-color: {{section.settings.description_button_color}}; 
+    color: {{section.settings.desc_font_color}};
+}
+
+.product-add p{
+    color: {{section.settings.add-to-cart-font-color}}; 
+}
+
+.product-add{
+    background-color: {{section.settings.add-to-cart-bgcolor}}; 
+}
+</style>
+
+
 <script>
+
 var product = {{ product | json }}
 
 document.querySelectorAll('.product-option input[type="radio"]').forEach(radio => {
@@ -161,8 +200,8 @@ document.querySelectorAll('.product-image-thumbs li').forEach(li => {
     li.classList.add('selected');
 
     const thumbnailImageUrl = li.querySelector('img').getAttribute('src');
-    const largeImageUrl = thumbnailImageUrl.replace('compact', 'large');
-    document.querySelector('#product-image').setAttribute('src', largeImageUrl);
+    const masterImageUrl = thumbnailImageUrl.replace('master', 'master');
+    document.querySelector('#product-image').setAttribute('src', masterImageUrl);
   });
 });
 
@@ -178,11 +217,32 @@ document.querySelector('.quantity-selector-minus').addEventListener('click', () 
         document.querySelector('#quantity').value=currentVal - 1
     }
 })
+
+document.querySelector('.desc-dropdown').addEventListener('click', () => {
+    var description = document.querySelector('.desc-pro'); 
+    if (description.style.display === "none") {
+        description.style.display = "block";
+    } else {
+        description.style.display = "none";
+    }
+});
 </script>
 
 {% schema %}
 {
     "name": "Product", 
+    "settings":[
+        {
+            "type": "color", 
+            "id": "add-to-cart-font-color", 
+            "label": "Add to Cart Button Font Color"
+        }, 
+        {
+            "type": "color", 
+            "id": "add-to-cart-bgcolor", 
+            "label": "Add to Cart Button Color"
+        }
+    ],
     "presets": [
         {
             "name": "Product"

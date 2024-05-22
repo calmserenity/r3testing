@@ -1,0 +1,105 @@
+<div class="cart">
+  {% form 'cart', cart %}
+    <section class="cart-sec">
+      {% if cart.empty? %}
+        <div class="empty-cart">
+          <p>cart is empty</p>
+        </div>
+      {% else %}
+        <div class="cart-info">
+          <div class="cart-left">
+            {% for item in cart.items %}
+              <img width="200" height="200" loading="lazy" src="{{ item.image | image_url }}" >
+              <h2>{{ item.product.title }}</h2>
+              <h3>{{item.variant.title}}</h3>
+              <p>{{ item.final_line_price | money }}</p>
+              <hr>
+              <p>Qty:
+                <div class="cart-quantity">
+                  <div class="quantity-selector">
+                    <button type="button" class="quantity-selector-minus" data-key="{{ item.key }}"> {% include 'icon-minus.liquid' %} </button>
+                    <input id="quantity-{{ item.key }}" name="updates[]" value="{{ item.quantity }}" class="quantity-selector-input" />
+                    <button type="button" class="quantity-selector-plus" data-key="{{ item.key }}"> {% include 'icon-plus.liquid' %} </button>
+                  </div>
+                </div>
+                <a href="{{ item.url_to_remove }}">remove</a>
+              </p>
+              <p>Total: {{ cart.total_price | money }}</p>
+            {% endfor %}
+            <button type="submit" name="update">update</button>
+          </div>
+          <div class="cart-right">
+            {% if cart.total_discount>0 %}
+              <div class="cart-discount">
+                <h3>Discounts</h3>
+                <span>{{cart.total_discounts | money }}</span>
+              </div>
+            {% endif %}
+            <div class="cart-total-price">
+              <h3>Subtotal</h3>
+              <span>{{cart.total_price | money }}</span>
+            </div>
+            <button type="submit" name="checkout">Checkout</button>
+          </div>
+        </div>
+      {% endif %}
+    </section>
+  {% endform %}
+</div>
+
+
+
+<script>
+  // Add event listener to each quantity input field
+  document.querySelectorAll('.quantity-selector-input').forEach(input => {
+    input.addEventListener('change', () => {
+      // Submit the form when the quantity changes
+      input.closest('form').submit();
+    });
+  });
+
+  document.querySelectorAll('.quantity-selector-plus').forEach(button => {
+    button.addEventListener('click', (event) => {
+      const itemKey = event.target.dataset.key;
+      const input = document.getElementById(`quantity-${itemKey}`);
+      const currentVal = Number(input.value);
+      input.value = currentVal + 1;
+    });
+  });
+
+  document.querySelectorAll('.quantity-selector-minus').forEach(button => {
+    button.addEventListener('click', (event) => {
+      const itemKey = event.target.dataset.key;
+      const input = document.getElementById(`quantity-${itemKey}`);
+      const currentVal = Number(input.value);
+      if (currentVal > 1) {
+        input.value = currentVal - 1;
+      }
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "cart",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background",
+        "default": "#F4F4F4"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text",
+        "default": "#000000"
+      }
+    ],
+    "presets": [
+      {
+        "name": "cart"
+      }
+    ]
+  }
+{% endschema %}

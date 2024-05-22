@@ -1,31 +1,29 @@
 <div class="desktop-featured">
-    <div class="dfeatured-title"> 
-        <h1> ICONIC</h1> 
-    </div> 
-    <div class="dfeature-row"> 
+    <div class="dfeatured-title">
+        <h1>ICONIC</h1>
+    </div>
+    <div class="dfeature-row">
         {% for product in collections['frontpage'].products %}
-            <div class="dfeature-column"> 
-                <div class="dfeature-imageslide"> 
-                    <a href= "{{ product.url}}"> 
-                        <img src= "{{ product.featured_image | image_url: width: 400}}"/> 
-                    </a>
-                    <h3>{{ product.title}} </h3> 
-                    <p> {{product.price | money }} </p>
-                </div> 
-            </div> 
+        <div class="dfeature-column">
+        <div class="dfeature-imageslide">
+            <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | image_url: source }}" />
+            </a>
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.price | money }}</p>
+        </div>
+        </div>
         {% endfor %}
-    </div> 
-</div> 
-
+    </div>
+</div>
 
 {% schema %}
 {
-    "name": "featured-products", 
-    "settings":[]
-    "presets":[
-        {
-            "name": "featured-products"
-        }
-    ]
+  "name": "featured-products",
+  "presets": [
+    {
+      "name": "featured-products"
+    }
+  ]
 }
 {% endschema %}

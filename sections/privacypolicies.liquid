@@ -1,0 +1,47 @@
+<div class="page-container"> 
+    <div class="page-title"> 
+        <h1 class="{{section.settings.title_font_size}}">{{section.settings.page_title}}</h1> 
+    </div> 
+    <div class="page-information"> 
+        {{page.content}}
+    </div> 
+</div> 
+
+
+{% schema %}
+{
+    "name": "Privacy-Policies", 
+    "settings": [
+        {
+            "type": "text", 
+            "id": "page_title", 
+            "label": "Page Title"
+        }, 
+        {
+            "type":"select", 
+            "id": "title_font_size", 
+            "label": "Title Font Size", 
+            "options": [
+                {
+                    "value": "h2", 
+                    "label": "Small"
+                }, 
+                {
+                    "value": "h1", 
+                    "label": "Medium"
+                }, 
+                {
+                    "value": "h0", 
+                    "label": "Big"
+                }
+            ], 
+            "default": "h1"
+        }
+    ], 
+    "presets": [
+        {
+            "name": "Privacy Policies"
+        }
+    ]
+}
+{% endschema %}

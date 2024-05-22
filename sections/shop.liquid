@@ -11,7 +11,7 @@
                 <div class="shop-column"> 
                     <div class="shop-imageslide"> 
                         <a href= "{{ product.url}}"> 
-                            <img src= "{{ product.featured_image | image_url: width: 400}}"/> 
+                            <img src= "{{ product.featured_image | image_url: source}}"/> 
                         </a>
                         <h3 class="{{section.settings.title_size}}">{{ product.title}} </h3> 
                         <p class="{{section.settings.price_size}}"> {{product.price | money }} </p>

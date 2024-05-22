@@ -1,0 +1,24 @@
+<div class="video">
+    <div class="video-gallery">
+        <h1>Video Gallery</h1>
+        <div class="video-container">
+            {% for media in product.media %}
+            {% if media.media_type == 'video' %}
+                {{ media | video_tag: image_size: '1000x', autoplay: true, loop: true, muted: true, controls: true }}
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "video-gallery", 
+    "presets":[
+        {
+            "name": "Video Gallery"
+        }
+    ]
+}
+{% endschema %}

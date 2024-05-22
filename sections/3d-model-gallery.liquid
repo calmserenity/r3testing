@@ -1,0 +1,34 @@
+<div class="model-container">
+    <div class="model-display">
+        <h1>3D MODEL</h1>
+        {% assign models = product.media | where: 'media_type', 'model' %}
+        {% for model in models %}
+            {{- model | model_viewer_tag: image_size: '800x', scale: '3' }}
+        {% endfor %}
+            <button id="ar-button" class="ar-button">View in AR</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var arButton = document.getElementById('ar-button');
+    var modelViewer = document.querySelector('model-viewer');
+
+    if (modelViewer) {
+        modelViewer.arButton = arButton; // Set the custom AR button
+        modelViewer.ar = true; // Enable AR
+    }
+});
+</script>
+
+
+{% schema %}
+{
+    "name": "Model-Gallery", 
+    "presets":[
+        {
+            "name": "Model Gallery"
+        }
+    ]
+}
+{% endschema %}

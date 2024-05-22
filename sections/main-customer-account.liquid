@@ -4,30 +4,35 @@
     <hr>
     <div class="customer_information_container">
         <div class="customer_information">
-            <table>
-                <tr>
-                    <td>Name</td>
-                    <td>{{customer.name}}</td>
-                </tr>
-                <tr>
-                    <td>Email </td>
-                    <td>{{customer.email}}</td>
-                </tr>
-                <tr>
-                    <td>Location </td>
-                    <td>{{customer.default_address.country}}</td> 
-                </tr>
-                <tr>
-                    <td>Marketing </td>
-                    <td>
-                        {% if customer.accepts_marketing %}
-                            Accepts Marketing
-                        {% else %}
-                            Does not accept Marketing
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
+            <div class="customer-info-table">
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{customer.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email </td>
+                        <td>{{customer.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Location </td>
+                        <td>{{customer.default_address.country}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Marketing </td>
+                        <td>
+                            {% if customer.accepts_marketing %}
+                                Accepts Marketing
+                            {% else %}
+                                Does not accept Marketing
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="logout-button">
+                <button><a href="/account/logout"><h5>Log Out</h5></a></button>
+            </div>
         </div>
         <div class="customer_order"> 
             {% if customer.orders.size > 0 %}
@@ -48,7 +53,7 @@
                             <td>{{ order.name }}</td>
                             <td>{{ order.created_at | date: "%B %d, %Y" }}</td>
                             <td>{{ order.total_price | money }}</td>
-                            <td>
+                            <td class="order-items">
                                 <ul>
                                 {% for item in order.line_items %}
                                     <li>{{ item.title }} - {{ item.quantity }} x {{ item.price | money }}</li>

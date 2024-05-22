@@ -1,40 +1,98 @@
-<section id="register" class="register-container"> 
-    <h1>Register</h1>
-    {% form 'create_customer' %}
-        {{ form.errors | default_errors }}
-
-        <div class="register-first-name">
-            <input type="text" name="customer[first_name]" placeholder=" First Name">
-        </div>
-
-        <div class="register-last-name">
-            <input type="text" name="customer[last_name]" placeholder=" Last Name">
-        </div>
-
-        <div class="register-email">
-            <input type="email" name="customer[email]" placeholder=" Email">
-        </div>
-
-        <div class="register-password">
-            <input type="password" name="customer[password]" placeholder=" Password" autocomplete="new-password">
-        </div>
-
-        <div class="register-country"> 
-            <select name="customer[country]" placeholder=" Country">
-                {{all_country_option_tags}}
-            </select>
-        </div>
-
-         <div class="accepts-marketing">
-            <input type="hidden" name="customer[accepts_marketing]" value="false" />
-
-            <input type="checkbox" name="customer[accepts_marketing]" />
-            <label for="accepts-marketing">Subscribe to email marketing</label>
-        </div>
-
-        <p>Already have an account? <a href="/account/login" class="hover-link">Log In</a></p>
-        <div class="register-submit">
-            <input type="submit" value="Create">
-        </div>
-    {% endform %}
+<section id="register" class="register-container">
+  <h1>Register</h1>
+  {% form 'create_customer' %}
+    {{ form.errors | default_errors }}
+    <div class="register-first-name">
+      <input type="text" name="customer[first_name]" placeholder=" First Name">
+    </div>
+    <div class="register-last-name">
+      <input type="text" name="customer[last_name]" placeholder=" Last Name">
+    </div>
+    <div class="register-email">
+      <input type="email" name="customer[email]" placeholder=" Email">
+    </div>
+    <div class="register-password">
+      <input type="password" name="customer[password]" placeholder=" Password" autocomplete="new-password" id="password">
+      <div id="password-strength-feedback"></div>
+    </div>
+    <div class="register-confirm-password">
+      <input type="password" name="customer[confirm_password]" placeholder=" Confirm Password" autocomplete="new-password" id="confirm-password">
+      <div id="password-match-feedback"></div>
+    </div>
+    <div class="register-country">
+      <select name="customer[country]" placeholder=" Country">
+        {{all_country_option_tags}}
+      </select>
+    </div>
+    <div class="accepts-marketing">
+      <input type="hidden" name="customer[accepts_marketing]" value="false" />
+      <input type="checkbox" name="customer[accepts_marketing]" />
+      <label for="accepts-marketing">Subscribe to email marketing</label>
+    </div>
+    <p>Already have an account? <a href="/account/login" class="hover-link">Log In</a></p>
+    <div class="register-submit">
+      <input type="submit" value="Create" id="submit-button" disabled>
+    </div>
+  {% endform %}
 </section>
+
+<script>
+  const passwordInput = document.getElementById('password');
+  const confirmPasswordInput = document.getElementById('confirm-password');
+  const passwordFeedback = document.getElementById('password-strength-feedback');
+  const passwordMatchFeedback = document.getElementById('password-match-feedback');
+  const submitButton = document.getElementById('submit-button');
+
+  passwordInput.addEventListener('input', validatePassword);
+  confirmPasswordInput.addEventListener('input', validatePassword);
+
+  function validatePassword() {
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+    const strength = calculatePasswordStrength(password);
+    displayPasswordStrength(strength);
+    checkPasswordMatch(password, confirmPassword);
+  }
+
+  function calculatePasswordStrength(password) {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/;
+    if (regex.test(password)) {
+      return 'strong';
+    } else if (password.length >= 6) {
+      return 'medium';
+    } else {
+      return 'weak';
+    }
+  }
+
+  function displayPasswordStrength(strength) {
+    let feedback;
+    switch (strength) {
+      case 'strong':
+        feedback = 'Strong password';
+        passwordFeedback.style.color = 'green';
+        break;
+      case 'medium':
+        feedback = 'Medium strength password';
+        passwordFeedback.style.color = 'orange';
+        break;
+      case 'weak':
+        feedback = 'Weak password';
+        passwordFeedback.style.color = 'red';
+        break;
+    }
+    passwordFeedback.textContent = feedback;
+  }
+
+  function checkPasswordMatch(password, confirmPassword) {
+    if (password === confirmPassword) {
+      passwordMatchFeedback.textContent = 'Passwords match';
+      passwordMatchFeedback.style.color = 'green';
+      submitButton.disabled = false;
+    } else {
+      passwordMatchFeedback.textContent = 'Passwords do not match';
+      passwordMatchFeedback.style.color = 'red';
+      submitButton.disabled = true;
+    }
+  }
+</script>
